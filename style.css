@@ -1,6 +1,7 @@
 h1 {
   width: 100vw;
   height: 50vh;
+  font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
