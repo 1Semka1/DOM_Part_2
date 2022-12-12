@@ -28,32 +28,60 @@ body.prepend(myTask)
 position.innerHTML = taskList.join('')
 createModelOverlay()
 
-document.addEventListener('keydown', (event) => {
-  event.preventDefault()
-  const taskItems = position.querySelectorAll('.task-item')
-  const button = body.querySelectorAll('button')
+body.addEventListener('keydown', (event) => {
+  // event.preventDefault()
   if (event.key === 'Tab') {
-    if (theme === 'ligth') {
-      body.style.background = '#24292E'
-      taskItems.forEach((item) => {
-        item.style.color = '#ffffff'
-      })
-      button.forEach((item) => {
-        item.style.border = '1px solid #ffffff'
-      })
-      theme = 'dark'
-    } else if (theme === 'dark') {
-      body.style.background = 'initial'
-      taskItems.forEach((item) => {
-        item.style.color = 'initial'
-      })
-      button.forEach((item) => {
-        item.style.border = 'border: none'
-      })
-      theme = 'ligth'
-    }
+    changeTheme()
   }
 })
+
+function setCurrentTheme() {
+  //Функция установки текущей темы при добавлении элемента
+  const taskItems = position.querySelectorAll('.task-item')
+  const button = body.querySelectorAll('button')
+  if (theme === 'ligth') {
+    body.style.background = 'initial'
+    taskItems.forEach((item) => {
+      item.style.color = 'initial'
+    })
+    button.forEach((item) => {
+      item.style.border = 'border: none'
+    })
+  } else if (theme === 'dark') {
+    body.style.background = '#24292E'
+    taskItems.forEach((item) => {
+      item.style.color = '#ffffff'
+    })
+    button.forEach((item) => {
+      item.style.border = '1px solid #ffffff'
+    })
+  }
+}
+
+function changeTheme() {
+  //Функция изменения темы
+  const taskItems = position.querySelectorAll('.task-item')
+  const button = body.querySelectorAll('button')
+  if (theme === 'ligth') {
+    body.style.background = '#24292E'
+    taskItems.forEach((item) => {
+      item.style.color = '#ffffff'
+    })
+    button.forEach((item) => {
+      item.style.border = '1px solid #ffffff'
+    })
+    theme = 'dark'
+  } else if (theme === 'dark') {
+    body.style.background = 'initial'
+    taskItems.forEach((item) => {
+      item.style.color = 'initial'
+    })
+    button.forEach((item) => {
+      item.style.border = 'border: none'
+    })
+    theme = 'ligth'
+  }
+}
 
 function createTasksList() {
   //Функция для оптимизации кода
@@ -111,6 +139,7 @@ createTasksBlock.addEventListener('submit', (event) => {
     taskList = createTasksList()
     position.innerHTML = taskList.join('') //Обновляю лист задач
     createModelOverlay()
+    setCurrentTheme()
   }
 })
 
